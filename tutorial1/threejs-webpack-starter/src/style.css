@@ -1,0 +1,40 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+html,
+body
+{
+    height: 100vh;
+    background-color: #10011A;
+}
+
+/*canvas element*/
+.webgl
+{  
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.container{
+    height:100vh;
+    display:grid;
+    place-items:center;
+}
+
+h1{
+    font-family: 'Poppins';
+    font-size:8rem;
+    text-transform: uppercase;
+    color:white;
+}
