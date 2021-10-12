@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import '@google/model-viewer/dist/model-viewer'
 
+
 function Box(props) {
   // This reference will give us direct access to the mesh
   const ref = useRef()
@@ -36,8 +37,9 @@ export default function App() {
     //   <Box position={[-1.2, 0, 0]} />
     //   <Box position={[1.2, 0, 0]} />
     // </Canvas>
-<model-viewer camera-controls auto-rotate src="https://res.cloudinary.com/hjigicb0f/image/upload/v1633355288/chaimae/Earth_cdlcdu.glb"  alt="An abstract 3D model with labeled origin and center" shadow-intensity="1" ar ar-modes="webxr scene-viewer quick-look"></model-viewer>
+  
 
+<model-viewer id="window3d" loading="eager" camera-controls auto-rotate  src="Astronaut.glb" alt="A 3D model of a shishkebab"></model-viewer>
   )
 }
 
