@@ -11,10 +11,13 @@ app.use(cors());
 
 app.post('/api/upload', async (req, res) => {
     try {
-        const fileStr = req.body.data;
- 
-        console.log(fileStr);
-        res.json({ msg: 'yaya' });
+        const file = req.body.data;
+       const response = (file,{
+           upload_preset:'3d-models'
+       })
+       console.log(response);
+        res.json({ msg: response });
+        res.status(500).json({err:"somehting when wrong"})
     } catch (err) {
         console.error(err);
     }
