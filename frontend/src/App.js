@@ -10,7 +10,7 @@ function App() {
         <div className="container">
             <Router>
                 <nav className="nav">
-                    <div className="nav-brand">Cloudinary Demo</div>
+                    <div className="nav-brand">home Demo</div>
                     <ul className="nav-items">
                         <li className="nav-item">
                             <Link to="/">Gallery</Link>
