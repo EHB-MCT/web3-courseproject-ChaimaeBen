@@ -5,7 +5,7 @@ export default function Home() {
   
     return (
         <div>
-       <h1>home here</h1>
+       <h1>new home here </h1>
         </div>
     );
 }
