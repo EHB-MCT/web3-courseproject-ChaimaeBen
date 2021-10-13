@@ -34,8 +34,10 @@ export default function Upload() {
     };
 
     const uploadImage = async (img) => {
+        console.log(img);
+
         try {
-            await fetch('/api/upload', {
+            await fetch('https://upload-3d-backend.herokuapp.com/api/upload', {
                 method: 'POST',
                 body: JSON.stringify({ data: img }),
                 headers: { 'Content-Type': 'application/json' },
