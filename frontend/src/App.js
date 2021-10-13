@@ -16,7 +16,7 @@ function App() {
                             <Link to="/">Gallery</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/upload">Upload</Link>
+                            <Link to="/upload">new Uploads</Link>
                         </li>
                     </ul>
                 </nav>
