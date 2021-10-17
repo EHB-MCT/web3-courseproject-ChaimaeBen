@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>new home here </h1>
+      <h1>new home hoem here </h1>
       {msg && <p class="msg">{msg}</p>}
     </div>
   );

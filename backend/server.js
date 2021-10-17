@@ -39,5 +39,5 @@ app.listen(port, () => {
 // create a GET route
 app.get("/", (req, res) => {
   //Line 9
-  res.send({ info: "YOUR BACKEND changed again  IS CONNECTED TO REACT" }); //Line 10
+  res.send({ info: "backend is done once again" }); //Line 10
 }); //L
