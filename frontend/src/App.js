@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
 import Upload from './pages/uploadPage';
 import Home from './pages/homePage';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Container,Nav } from 'react-bootstrap';
 
 

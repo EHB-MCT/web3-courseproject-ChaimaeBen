@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./design.css";
-import ReactFileReader from "react-file-reader";
 
 export default function Upload() {
   const [model, setModel] = useState("");
