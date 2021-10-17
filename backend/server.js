@@ -1,32 +1,32 @@
-const { cloudinary } = require("./utils/cloudinary");
 const express = require("express");
 const app = express();
 var cors = require("cors");
+const { cloudinary } = require("./utils/cloudinary.js");
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
-app.post("/api/upload", async (req, res) => {
+
+app.post('/api/upload', async (req, res) => {
   try {
-    const file = req.body.data;
-    const response =
-      (file,
-      {
-        upload_preset: "3d-models",
+      const fileStr = req.body.data;
+      console.log('backend file ' + fileStr)
+      const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+          upload_preset: '3d-models',
       });
-    console.log(response);
-    res.json({ msg: response });
-    res.status(500).json({ err: "somehting when wrong" });
+      console.log(uploadResponse);
+      res.json({ msg: uploadResponse, file:fileStr });
   } catch (err) {
-    console.error(err);
+      console.error(err);
+      res.status(500).json({ err: 'Something went wrong' });
   }
 });
 
 app.get("/api/upload", async (req, res) => {
   try {
-      console.log('the upload file')
+    console.log("the upload file");
     res.json({ msg: "you got the upload file" });
   } catch (err) {
     console.error(err);
