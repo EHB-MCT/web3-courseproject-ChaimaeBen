@@ -12,7 +12,6 @@ app.use(cors());
 app.get('/api/gallery', async (req, res) => {
   const { resources } = await cloudinary.search
       .expression('folder:3d-models')
-      .sort_by('public_id', 'desc')
       .max_results(30)
       .execute();
 
