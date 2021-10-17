@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./design.css";
 export default function Upload() {
- // const [model, setModel] = useState("");
-  const [picture, setPicture] = useState("");
+  const [model, setModel] = useState("");
+  const [selectedModel, setSelectedModel] = useState();
 
+  const [picture, setPicture] = useState("");
   const [selectedPicture, setSelectedPicture] = useState();
-  //const [selectedModel, setSelectedModel] = useState();
 
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
 
-//   const handleModelChange = (e) => {
-//     const file = e.target.files[0];
-//     setSelectedModel(file);
-//     setModel(e.target.value);
-//   };
+  const handleModelChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedModel(file);
+    console.log("here is a model "+file)
+    setModel(e.target.value);
+  };
 
   const handlePicChange = (e) => {
     const file = e.target.files[0];
@@ -25,9 +26,9 @@ export default function Upload() {
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    console.log("the naaaame " + title +" "+email);
+    console.log("the naame " + title +" "+email+" "+model+" "+picture +" 555 ");
 
-    if (!selectedPicture) return;
+    if (!selectedPicture||!selectedModel) return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedPicture);
     reader.onloadend = () => {
@@ -38,13 +39,13 @@ export default function Upload() {
     };
   };
 
-  const uploadImage = async (img1) => {
+  const uploadImage = async (img) => {
 
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
         body: JSON.stringify({
-          data: img1,
+          image: img,
           title: title,
           email: email,
         }),
@@ -54,6 +55,10 @@ export default function Upload() {
       console.error(err);
     }
   };
+
+
+
+
   return (
     <div className="col-md-6 offset-md-3 mt-5">
       <h1>Upload your 3d model now!</h1>
@@ -91,17 +96,17 @@ export default function Upload() {
 
         <hr />
 
-        {/* <div className="form-group mt-3">
+        <div className="form-group mt-3">
           <label className="mr-2">Upload your 3d model: </label>
           <input
             id="model"
             type="file"
             name="model"
-            //onchange
+            onChange={handleModelChange}
             value={model}
             className="form-input"
           />
-        </div> */}
+        </div>
         <div className="form-group mt-3">
           <label className="mr-2">Upload your thumbnail: </label>
           <input
