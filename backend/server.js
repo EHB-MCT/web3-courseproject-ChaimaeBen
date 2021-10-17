@@ -42,7 +42,7 @@ app.post('/api/upload', async (req, res) => {
     });
 
       console.log(ModelResponse);
-      res.json({ msg: ModelResponse, file:fileStr , info:formInfo});
+      res.json({ model: ModelResponse, image:imageResponse});
   } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Something went wrong' });

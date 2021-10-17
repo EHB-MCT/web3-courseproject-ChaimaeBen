@@ -14,7 +14,6 @@ export default function Upload() {
   const handleModelChange = (e) => {
     const file = e.target.files[0];
     setSelectedModel(file);
-    console.log("here is a model "+file)
     setModel(e.target.value);
   };
 
@@ -26,21 +25,24 @@ export default function Upload() {
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    console.log("the naame " + title +" "+email+" "+model+" "+picture +" 555 ");
+    console.log(
+      "the naame " + title + " " + email + " " + model + " " + picture + " 555 "
+    );
 
-    if (!selectedPicture||!selectedModel) return;
+    if (!selectedPicture || !selectedModel) return;
     const reader = new FileReader();
+    const reader2 = new FileReader();
     reader.readAsDataURL(selectedPicture);
-    reader.onloadend = () => {
-      uploadImage(reader.result);
-    };
-    reader.onerror = () => {
-      console.error("does not work!!");
+    reader2.readAsDataURL(selectedModel);
+
+    console.log(reader,reader2);
+    uploadImage(reader,reader2);
+
+    reader.onerror = (e) => {
+      console.error(e);
     };
   };
-
-  const uploadImage = async (img) => {
-
+  const uploadImage = async (img,mdl) => {
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
@@ -48,6 +50,7 @@ export default function Upload() {
           image: img,
           title: title,
           email: email,
+          model:mdl
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -55,9 +58,6 @@ export default function Upload() {
       console.error(err);
     }
   };
-
-
-
 
   return (
     <div className="col-md-6 offset-md-3 mt-5">
