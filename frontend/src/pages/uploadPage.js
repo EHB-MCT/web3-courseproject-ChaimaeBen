@@ -4,7 +4,7 @@ import "./design.css";
 export default function Upload() {
   const [ModelFileState, setModelFileState] = useState("");
   const [PictureFileState, setPictureFileState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
+
   const [selectedFile, setSelectedFile] = useState();
   const [selectedModel, setSelectedModel] = useState();
 
@@ -20,22 +20,15 @@ export default function Upload() {
 
   const handlePicChange = (e) => {
     const file = e.target.files[0];
-    previewFile(file);
     setSelectedFile(file);
     setPictureFileState(e.target.value);
-  };
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
   };
 
   const handleSubmitFile = (e) => {
      
     e.preventDefault();
+    console.log(e.target.files)
+    console.log("the naaaame "+e.target.value[0] +" "+ TitleInput)
     console.log(e.target.files)
 
     if (!selectedFile||!selectedModel) return;
