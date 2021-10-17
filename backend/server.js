@@ -29,8 +29,8 @@ app.post('/api/upload', async (req, res) => {
 
       const uploadResponse = await cloudinary.uploader.upload(fileStr, {
           upload_preset: '3d-models',
-          folder:folderEmail,
-         public_id:formInfo
+          folder:JSON.stringify(folderEmail),
+         public_id:JSON.stringify(formInfo)
       });
       console.log(uploadResponse);
       res.json({ msg: uploadResponse, file:fileStr , info:formInfo});
