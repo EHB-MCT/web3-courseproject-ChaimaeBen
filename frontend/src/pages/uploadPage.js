@@ -27,8 +27,7 @@ export default function Upload() {
   const handleSubmitFile = (e) => {
      
     e.preventDefault();
-    console.log(e.target.files)
-    console.log("the naaaame "+e.target.value[0] +" "+ TitleInput)
+    console.log("the naaaame "+TitleInput)
     console.log(e.target.files)
 
     if (!selectedFile||!selectedModel) return;
