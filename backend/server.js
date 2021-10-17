@@ -23,8 +23,10 @@ app.get('/api/gallery', async (req, res) => {
 app.post('/api/upload', async (req, res) => {
   try {
       const fileStr = req.body.data;
-      const formInfo = req.body.title;
-      const folderEmail=req.body.email;
+      const formInfo = {"title":req.body.title};
+      const folderEmail={"email":req.body.email};
+
+
       const uploadResponse = await cloudinary.uploader.upload(fileStr, {
           upload_preset: '3d-models',
           folder:folderEmail,

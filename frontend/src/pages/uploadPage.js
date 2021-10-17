@@ -56,7 +56,7 @@ export default function Upload() {
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: img1 }),
+        body: JSON.stringify({ data: img1,title:TitleInput,email:EmailInput }),
         headers: { "Content-Type": "application/json" },
       });
     } catch (err) {
@@ -69,8 +69,8 @@ export default function Upload() {
 
       <form onSubmit={handleSubmitFile} className="form">
         <br />
-        <div class="form-group">
-          <label for="exampleInputName">Title of 3d model</label>
+        <div className="form-group">
+          <label for="title">Title of 3d model</label>
           <input
             type="text"
             name="title"
@@ -84,7 +84,7 @@ export default function Upload() {
         </div>
         <br />
         <div className="form-group">
-          <label for="exampleInputEmail1" required="required">
+          <label for="email" required="required">
             Email address
           </label>
           <input
@@ -93,7 +93,7 @@ export default function Upload() {
             value={EmailInput}
             onChange={(e) => setEmailInput(e.target.value)}
             className="form-control"
-            id="exampleInputEmail1"
+            id="email"
             aria-describedby="emailHelp"
             placeholder="Enter email"
           />
@@ -125,7 +125,7 @@ export default function Upload() {
         </div>
         <hr />
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
