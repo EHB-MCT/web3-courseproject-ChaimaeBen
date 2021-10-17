@@ -6,12 +6,15 @@ export default function Upload() {
   const [PictureFileState, setPictureFileState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+  const [selectedModel, setSelectedModel] = useState();
+
   const [TitleInput, setTitleInput] = useState("");
   const [EmailInput, setEmailInput] = useState("");
 
-  const handleModelInputChange = (e) => {
+
+  const handleModelChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedModel(file)
     setModelFileState(e.target.value);
   };
 
@@ -19,7 +22,7 @@ export default function Upload() {
     const file = e.target.files[0];
     previewFile(file);
     setSelectedFile(file);
-    setModelFileState(e.target.value);
+    setPictureFileState(e.target.value);
   };
 
   const previewFile = (file) => {
@@ -31,10 +34,13 @@ export default function Upload() {
   };
 
   const handleSubmitFile = (e) => {
+     
     e.preventDefault();
-    if (!selectedFile) return;
+    console.log(e.target.files)
+
+    if (!selectedFile||!selectedModel) return;
     const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
+    reader.readAsDataURL(selectedFile,selectedModel);
     reader.onloadend = () => {
       uploadImage(reader.result);
     };
@@ -43,13 +49,14 @@ export default function Upload() {
     };
   };
 
-  const uploadImage = async (img) => {
-    console.log(img);
+  const uploadImage = async (img1,img2) => {
+    console.log("imaaage 1 ===================================",img1);
+    console.log("imaaage 2 ===================================",img2);
 
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: img }),
+        body: JSON.stringify({ data: img1 }),
         headers: { "Content-Type": "application/json" },
       });
     } catch (err) {
@@ -57,7 +64,7 @@ export default function Upload() {
     }
   };
   return (
-    <div class="col-md-6 offset-md-3 mt-5">
+    <div className="col-md-6 offset-md-3 mt-5">
       <h1>Upload your 3d model now!</h1>
 
       <form onSubmit={handleSubmitFile} className="form">
@@ -67,8 +74,8 @@ export default function Upload() {
           <input
             type="text"
             name="title"
-            class="form-control"
-            id="exampleInputName"
+            className="form-control"
+            id="title"
             value={TitleInput}
             onChange={(e) => setTitleInput(e.target.value)}
             placeholder="Enter your name and surname"
@@ -76,7 +83,7 @@ export default function Upload() {
           />
         </div>
         <br />
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputEmail1" required="required">
             Email address
           </label>
@@ -85,7 +92,7 @@ export default function Upload() {
             name="email"
             value={EmailInput}
             onChange={(e) => setEmailInput(e.target.value)}
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -94,19 +101,19 @@ export default function Upload() {
 
         <hr />
 
-        <div class="form-group mt-3">
-          <label class="mr-2">Upload your 3d model: </label>
+        <div className="form-group mt-3">
+          <label className="mr-2">Upload your 3d model: </label>
           <input
             id="fileInput"
             type="file"
             name="image"
-            onChange={(e) => setModelFileState(e.target.files[0])}
+            onChange={handleModelChange}
             value={ModelFileState}
             className="form-input"
           />
         </div>
-        <div class="form-group mt-3">
-          <label class="mr-2">Upload your thumbnail: </label>
+        <div className="form-group mt-3">
+          <label className="mr-2">Upload your thumbnail: </label>
           <input
             id="fileInput"
             type="file"
