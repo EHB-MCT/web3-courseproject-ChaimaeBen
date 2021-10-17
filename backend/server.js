@@ -29,20 +29,20 @@ app.post('/api/upload', async (req, res) => {
       const folderEmail=req.body.email;
         
 
-      const uploadResponse = await cloudinary.uploader.upload(fileImage, {
+      const imageResponse = await cloudinary.uploader.upload(fileImage, {
           upload_preset: '3d-models',
           folder:JSON.stringify(folderEmail),
          public_id:"image_"+JSON.stringify(formInfo)
       });
 
-      const uploadResponse = await cloudinary.uploader.upload(fileModel, {
+      const ModelResponse = await cloudinary.uploader.upload(fileModel, {
         upload_preset: '3d-models',
         folder:JSON.stringify(folderEmail),
        public_id:"model_"+JSON.stringify(formInfo)
     });
 
-      console.log(uploadResponse);
-      res.json({ msg: uploadResponse, file:fileStr , info:formInfo});
+      console.log(ModelResponse);
+      res.json({ msg: ModelResponse, file:fileStr , info:formInfo});
   } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Something went wrong' });
