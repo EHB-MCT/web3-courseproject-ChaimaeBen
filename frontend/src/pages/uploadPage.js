@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./design.css";
+import ReactFileReader from "react-file-reader";
+
 export default function Upload() {
   const [model, setModel] = useState("");
   const [selectedModel, setSelectedModel] = useState();
-
-  const [picture, setPicture] = useState("");
-  const [selectedPicture, setSelectedPicture] = useState();
 
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
@@ -17,40 +16,27 @@ export default function Upload() {
     setModel(e.target.value);
   };
 
-  const handlePicChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedPicture(file);
-    setPicture(e.target.value);
-  };
-
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    console.log(
-      "the naame " + title + " " + email + " " + model + " " + picture + " 555 "
-    );
 
-    if (!selectedPicture || !selectedModel) return;
+    if (!selectedModel) return;
     const reader = new FileReader();
-    const reader2 = new FileReader();
-    reader.readAsDataURL(selectedPicture);
-    reader2.readAsDataURL(selectedModel);
-
-    console.log(reader,reader2);
-    uploadImage(reader,reader2);
-
-    reader.onerror = (e) => {
-      console.error(e);
+    reader.readAsDataURL(selectedModel);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error("does not work!!");
     };
   };
-  const uploadImage = async (img,mdl) => {
+  const uploadImage = async (mdl) => {
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
         body: JSON.stringify({
-          image: img,
           title: title,
           email: email,
-          model:mdl
+          model: mdl,
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -104,17 +90,6 @@ export default function Upload() {
             name="model"
             onChange={handleModelChange}
             value={model}
-            className="form-input"
-          />
-        </div>
-        <div className="form-group mt-3">
-          <label className="mr-2">Upload your thumbnail: </label>
-          <input
-            id="picture"
-            type="file"
-            name="picture"
-            onChange={handlePicChange}
-            value={picture}
             className="form-input"
           />
         </div>
