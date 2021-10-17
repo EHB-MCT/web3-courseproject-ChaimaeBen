@@ -31,14 +31,14 @@ app.post('/api/upload', async (req, res) => {
 
       const imageResponse = await cloudinary.uploader.upload(fileImage, {
           upload_preset: '3d-models',
-          folder:JSON.stringify(folderEmail),
-         public_id:"image_"+JSON.stringify(formInfo)
+          folder:folderEmail,
+         public_id:"image_"+formInfo
       });
 
       const ModelResponse = await cloudinary.uploader.upload(fileModel, {
         upload_preset: '3d-models',
-        folder:JSON.stringify(folderEmail),
-       public_id:"model_"+JSON.stringify(formInfo)
+        folder:folderEmail,
+       public_id:"model_"+formInfo
     });
 
       console.log(ModelResponse);
