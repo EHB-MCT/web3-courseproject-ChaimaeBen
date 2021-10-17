@@ -2,53 +2,52 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./design.css";
 export default function Upload() {
-  const [ModelFileState, setModelFileState] = useState("");
-  const [PictureFileState, setPictureFileState] = useState("");
+ // const [model, setModel] = useState("");
+  const [picture, setPicture] = useState("");
 
-  const [selectedFile, setSelectedFile] = useState();
-  const [selectedModel, setSelectedModel] = useState();
+  const [selectedPicture, setSelectedPicture] = useState();
+  //const [selectedModel, setSelectedModel] = useState();
 
-  const [TitleInput, setTitleInput] = useState("");
-  const [EmailInput, setEmailInput] = useState("");
+  const [title, setTitle] = useState("");
+  const [email, setEmail] = useState("");
 
-
-  const handleModelChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedModel(file)
-    setModelFileState(e.target.value);
-  };
+//   const handleModelChange = (e) => {
+//     const file = e.target.files[0];
+//     setSelectedModel(file);
+//     setModel(e.target.value);
+//   };
 
   const handlePicChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
-    setPictureFileState(e.target.value);
+    setSelectedPicture(file);
+    setPicture(e.target.value);
   };
 
   const handleSubmitFile = (e) => {
-     
     e.preventDefault();
-    console.log("the naaaame "+TitleInput)
-    console.log(e.target.files)
+    console.log("the naaaame " + title +" "+email);
 
-    if (!selectedFile||!selectedModel) return;
+    if (!selectedPicture) return;
     const reader = new FileReader();
-    reader.readAsDataURL(selectedFile,selectedModel);
+    reader.readAsDataURL(selectedPicture);
     reader.onloadend = () => {
       uploadImage(reader.result);
     };
     reader.onerror = () => {
-      console.error("AHHHHHHHH!!");
+      console.error("does not work!!");
     };
   };
 
-  const uploadImage = async (img1,img2) => {
-    console.log("imaaage 1 ===================================",img1);
-    console.log("imaaage 2 ===================================",img2);
+  const uploadImage = async (img1) => {
 
     try {
       await fetch("https://upload-3d-backend.herokuapp.com/api/upload", {
         method: "POST",
-        body: JSON.stringify({ data: img1,title:TitleInput,email:EmailInput }),
+        body: JSON.stringify({
+          data: img1,
+          title: title,
+          email: email,
+        }),
         headers: { "Content-Type": "application/json" },
       });
     } catch (err) {
@@ -62,56 +61,55 @@ export default function Upload() {
       <form onSubmit={handleSubmitFile} className="form">
         <br />
         <div className="form-group">
-          <label for="title">Title of 3d model</label>
+          <label htmlFor="title">Title of 3d model</label>
           <input
             type="text"
             name="title"
             className="form-control"
             id="title"
-            value={TitleInput}
-            onChange={(e) => setTitleInput(e.target.value)}
-            placeholder="Enter your name and surname"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="enter the name of your project"
             required="required"
           />
         </div>
         <br />
         <div className="form-group">
-          <label for="email" required="required">
+          <label htmlFor="email" required="required">
             Email address
           </label>
           <input
             type="email"
             name="email"
-            value={EmailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="form-control"
             id="email"
-            aria-describedby="emailHelp"
             placeholder="Enter email"
           />
         </div>
 
         <hr />
 
-        <div className="form-group mt-3">
+        {/* <div className="form-group mt-3">
           <label className="mr-2">Upload your 3d model: </label>
           <input
-            id="fileInput"
+            id="model"
             type="file"
-            name="image"
-            onChange={handleModelChange}
-            value={ModelFileState}
+            name="model"
+            //onchange
+            value={model}
             className="form-input"
           />
-        </div>
+        </div> */}
         <div className="form-group mt-3">
           <label className="mr-2">Upload your thumbnail: </label>
           <input
-            id="fileInput"
+            id="picture"
             type="file"
-            name="image"
+            name="picture"
             onChange={handlePicChange}
-            value={PictureFileState}
+            value={picture}
             className="form-input"
           />
         </div>
