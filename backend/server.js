@@ -33,7 +33,7 @@ app.post('/api/upload', async (req, res) => {
     });
 
       console.log(ModelResponse);
-      res.json({ model: ModelResponse, image:imageResponse});
+      res.json({ model: ModelResponse});
   } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Something went wrong' });
