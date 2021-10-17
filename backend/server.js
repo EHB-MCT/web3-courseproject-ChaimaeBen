@@ -9,6 +9,17 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 
+app.get('/api/gallery', async (req, res) => {
+  const { resources } = await cloudinary.search
+      .expression('folder:3d-models')
+      .sort_by('public_id', 'desc')
+      .max_results(30)
+      .execute();
+
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
+});
+
 app.post('/api/upload', async (req, res) => {
   try {
       const fileStr = req.body.data;
