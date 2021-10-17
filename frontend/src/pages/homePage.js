@@ -31,7 +31,7 @@ export default function Home() {
             
           <Transformation fetchFormat="gif" />
   <Transformation flags="animated" />
-  <Transformation aspectRatio="1.0" height="200" crop="fill" />
+  <Transformation aspectRatio="1.0" height="40" crop="fill" />
           </Image>
       </CloudinaryContext>
      
