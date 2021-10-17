@@ -31,7 +31,7 @@ app.post('/api/upload', async (req, res) => {
          public_id:"heif"
       });
       console.log(uploadResponse);
-      res.json({ msg: uploadResponse, file:fileStr , info:formInfo});
+      res.json({ msg: uploadResponse, file:fileStr});
   } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Something went wrong' });
