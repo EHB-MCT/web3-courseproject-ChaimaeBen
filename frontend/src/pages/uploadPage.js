@@ -17,7 +17,7 @@ export default function Upload() {
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-
+  console.log(selectedModel)
     if (!selectedModel) return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedModel);

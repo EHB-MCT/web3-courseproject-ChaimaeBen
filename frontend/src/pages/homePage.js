@@ -42,7 +42,7 @@ return str2.split("/").pop();
         models.map((imageId, index) => (
 
 
-         <Link to={`/detail/${imageId.asset_id}`}>
+         <Link to={`/detail/${imageId.asset_id}`} style={{ textDecoration: 'none' }}>
 
           <Card style={{ width: "18rem" }} className="card"  key={imageId.asset_id}>
             <Card.Body id="content_card">
