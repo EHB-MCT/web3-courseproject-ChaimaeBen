@@ -34,30 +34,29 @@ return str2.split("/").pop();
   }, []);
 
   return (
-<div class="centered" >
+<div className="centered" >
       <h1>Gallery of all 3d models!</h1>
-      <section class="cards">
-
+      <section className="cards">
+      
       {models &&
         models.map((imageId, index) => (
+         <Link to={`/detail/${stringSub(imageId.public_id)}`}>
 
-          <Link to={`/detail/${stringSub(imageId)}`}>
-
-          <Card style={{ width: "18rem" }} class="card">
+          <Card style={{ width: "18rem" }} className="card">
             <Card.Body id="content_card">
-              <CloudinaryContext cloudName="dmj6tqnkw" class="content" >
-                <Image publicId={imageId}>
+              <CloudinaryContext cloudName="dmj6tqnkw" className="content" >
+                <Image publicId={imageId.public_id}>
                   <Transformation fetchFormat="gif" />
                   <Transformation flags="animated" />
                   <Transformation height="800" width="800" crop="crop" />
                 </Image>
               </CloudinaryContext>
-              <Card.Title id="title">{stringSub(imageId)}</Card.Title>
+              <Card.Title id="title">{stringSub(imageId.public_id)}</Card.Title>
             </Card.Body>
           </Card>
-          </Link>
-        ))}
-        </section>
+         </Link>
+         ))}
+         </section>
     </div>
   );
 }
