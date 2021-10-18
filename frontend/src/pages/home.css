@@ -1,0 +1,24 @@
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+ }
+
+ #title {
+    text-align: center;
+  }
+  #content_card{
+    justify-content: center;
+    padding:10px;
+
+}
+
+#content_card img{
+    width:200px;
+    height:200px;
+    align-content: center;
+
+}
+.content{
+    display: flex;
+
+justify-content: center;}

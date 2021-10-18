@@ -8,34 +8,32 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
-
-app.get('/api/gallery', async (req, res) => {
+app.get("/api/gallery", async (req, res) => {
   const { resources } = await cloudinary.search
-      .expression('folder:3d-models')
-      .max_results(30)
-      .execute();
+    .max_results(30)
+    .execute();
 
-  const publicIds = resources.map((file) => file.public_id);
-  res.send(publicIds);
+  const fileObject = resources.map((file) => file);
+  res.send(fileObject);
 });
 
-app.post('/api/upload', async (req, res) => {
+app.post("/api/upload", async (req, res) => {
   try {
-      const fileModel = req.body.model;
-      const formInfo = req.body.title;
-      const folderEmail=req.body.email;
-        
-      const ModelResponse = await cloudinary.uploader.upload(fileModel, {
-        upload_preset: '3d-models',
-        folder:"3d-models/"+folderEmail,
-       public_id:formInfo
+    const fileModel = req.body.model;
+    const formInfo = req.body.title;
+    const folderEmail = req.body.email;
+
+    const ModelResponse = await cloudinary.uploader.upload(fileModel, {
+      upload_preset: "3d-models",
+      folder: "3d-models/" + folderEmail,
+      public_id: formInfo,
     });
 
-      console.log(ModelResponse);
-      res.json({ model: ModelResponse});
+    console.log(ModelResponse);
+    res.json({ model: ModelResponse });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Something went wrong' });
+    console.error(err);
+    res.status(500).json({ err: "Something went wrong" });
   }
 });
 
