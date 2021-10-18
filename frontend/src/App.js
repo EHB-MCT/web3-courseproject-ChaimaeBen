@@ -29,8 +29,9 @@ function App() {
       <div>
         <Switch>
           <Route component={Upload} path="/upload" />
-          <Route component={Home} path="/" />
           <Route component={Detail} path="/detail/:id" />
+          <Route component={Home} path="/" />
+
         </Switch>
       </div>
     </div>

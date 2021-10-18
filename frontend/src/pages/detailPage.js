@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useParams} from "react-router-dom"
+import '@google/model-viewer/dist/model-viewer'
 
 export default function Detail() {
 
@@ -28,7 +29,7 @@ export default function Detail() {
 
     return (
         <div>
-         <p>{id}</p>
+<model-viewer id="window3d" loading="eager" camera-controls auto-rotate  src="https://res.cloudinary.com/dmj6tqnkw/image/upload/v1634513630/3d-models/helloGITF_dvxemm_djrvnl.glb" alt="A 3D model "></model-viewer>
         </div>
     )
 }
