@@ -8,6 +8,21 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
+
+
+app.get('/detail/:id', async (req, res) => {
+  const id_file=req.params.id;
+  const { resources } = await cloudinary.search
+      .expression('asset_id:'+id_file)
+      .sort_by('public_id', 'desc')
+      .max_results(30)
+      .execute();
+  const publicIds = resources.map((file) => file);
+  console.log(publicIds);
+
+  res.send(publicIds);
+});
+
 app.get("/api/gallery", async (req, res) => {
   const { resources } = await cloudinary.search
     .max_results(30)

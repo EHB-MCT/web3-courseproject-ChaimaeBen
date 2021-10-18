@@ -4,6 +4,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import Upload from './pages/uploadPage';
 import Home from './pages/homePage';
 import { Navbar,Container,Nav } from 'react-bootstrap';
+import Detail from "./pages/detailPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 <Switch>
 <Route component={Upload} path="/upload" />
                     <Route component={Home} path="/" />
+                    <Route component={Detail} path="/detail/:id"/>
           </Switch>
 </div>
       </div>

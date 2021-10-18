@@ -40,7 +40,7 @@ return str2.split("/").pop();
       
       {models &&
         models.map((imageId, index) => (
-         <Link to={`/detail/${stringSub(imageId.public_id)}`}>
+         <Link to={`/detail/${imageId.public_id}`}>
 
           <Card style={{ width: "18rem" }} className="card">
             <Card.Body id="content_card">
@@ -51,7 +51,7 @@ return str2.split("/").pop();
                   <Transformation height="800" width="800" crop="crop" />
                 </Image>
               </CloudinaryContext>
-              <Card.Title id="title">{stringSub(imageId.public_id)}</Card.Title>
+              <Card.Title id="title">{imageId.filename}</Card.Title>
             </Card.Body>
           </Card>
          </Link>
