@@ -17,19 +17,20 @@ export default function Detail() {
               "https://upload-3d-backend.herokuapp.com/detail/"+id
             );
             const data = await res.json();
-            setModel(data);
-            console.log(data);
-          } catch (err) {
+            console.log("here is the detail data ===== "+JSON.stringify(data[0].secure_url));
+
+            setModel(data[0].secure_url);
+                    } catch (err) {
             console.error(err);
           }
         }
-        console.log("param "+id)
         fetchData();
       }, []);
 
     return (
         <div>
-<model-viewer id="window3d" loading="eager" camera-controls auto-rotate  src="https://res.cloudinary.com/dmj6tqnkw/image/upload/v1634513630/3d-models/helloGITF_dvxemm_djrvnl.glb" alt="A 3D model "></model-viewer>
+        
+<model-viewer id="window3d" loading="eager" camera-controls auto-rotate  src={model} alt="A 3D model "></model-viewer>
         </div>
     )
 }
