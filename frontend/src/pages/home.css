@@ -3,6 +3,9 @@
     justify-content: space-evenly;
  }
 
+  h1{
+      margin-left:  40px; ;
+  }
  #title {
     text-align: center;
   }
@@ -11,7 +14,13 @@
     padding:10px;
 
 }
+#linkCard {
 
+text-decoration: none;
+color: black;
+
+
+}
 #content_card img{
     width:200px;
     height:200px;
