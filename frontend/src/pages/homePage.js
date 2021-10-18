@@ -40,9 +40,11 @@ return str2.split("/").pop();
       
       {models &&
         models.map((imageId, index) => (
-         <Link to={`/detail/${imageId.public_id}`}>
 
-          <Card style={{ width: "18rem" }} className="card">
+
+         <Link to={`/detail/${imageId.asset_id}`}>
+
+          <Card style={{ width: "18rem" }} className="card"  key={imageId.asset_id}>
             <Card.Body id="content_card">
               <CloudinaryContext cloudName="dmj6tqnkw" className="content" >
                 <Image publicId={imageId.public_id}>
