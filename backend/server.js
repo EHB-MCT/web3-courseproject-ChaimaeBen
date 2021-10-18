@@ -18,7 +18,7 @@ app.get('/detail/:id', async (req, res) => {
       .max_results(30)
       .execute();
   const publicIds = resources.map((file) => file);
-  console.log(publicIds);
+  console.log(publicIds)
 
   res.send(publicIds);
 });
