@@ -195,7 +195,6 @@ window.addEventListener('resize', () =>
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
-
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
@@ -210,12 +209,41 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000)
-camera.position.set(6, 7, - 4)
+camera.position.set(-28, 16, - 4)
 scene.add(camera)
 
+gui.add(camera.position,'x').min(-100).max(100).step(4)
+gui.add(camera.position,'y').min(-100).max(100).step(4)
+gui.add(camera.position,'z').min(-100).max(100).step(4)
+
+gui.add(camera.rotation,'x').min(-100).max(100).step(4)
+gui.add(camera.rotation,'y').min(-100).max(100).step(4)
+gui.add(camera.rotation,'z').min(-100).max(100).step(4)
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
+// controls.autoRotate = true;
+// controls.autoRotateSpeed = 0.03;
+// controls.enableDamping = false;
+controls.enableZoom= true;
+controls.enableRotate= true;
+// controls.dampingFactor = 0.1;
+// controls.rotateSpeed = 0.1;
+// controls.minDistance = 1;
+// controls.maxDistance = 200;
+
+document.querySelector(".point-6").onclick = function() {
+    
+    //zoomModel(true,20);
+  console.log(zoomModel(true))
+};
+console.log()
+const zoomModel = () =>{
+        camera.position.set(24, 36, -28)
+
+}
+
+    
+
 
 /**
  * Renderer
@@ -236,8 +264,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 /**
  * Animate
  */
+
+
+
 const tick = () =>
 {
+
     // Update controls
     controls.update()
 

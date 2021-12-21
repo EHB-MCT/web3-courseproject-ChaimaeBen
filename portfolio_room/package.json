@@ -5,7 +5,8 @@
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js",
     "prod": "git switch prod; git merge main; git push; git switch main",
-    "heroku-postbuild": "webpack -p"
+    "heroku-prebuild": "",
+    "heroku-postbuild": "babel-node tools/build.js",
   },
   "dependencies": {
     "@babel/core": "^7.15.5",
